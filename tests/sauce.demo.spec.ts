@@ -1,23 +1,55 @@
-import { test } from "@playwright/test";
+import { CheckoutCompletePage } from "./pages/checkout.complete.page";
+import { CheckoutOverviewPage } from "./pages/checkout.overview.page";
+import { CheckoutInfoPage } from "./pages/checkout.info.page";
+import { ShoppingCart } from "./pages/shopping.cart.page";
+import { expect, test } from "@playwright/test";
 import { LoginPage } from "./pages/login.page";
+import { ProductsPage } from "./pages/products.page";
 
 test.describe("Test Suite", async () => {
+  let productsPage: ProductsPage;
+  let loginPage: LoginPage;
+  let shoppingCart: ShoppingCart;
+  let checkoutInfoPage: CheckoutInfoPage;
+  let checkoutOverviewPage: CheckoutOverviewPage;
+  let checkoutCompletePage: CheckoutCompletePage;
+
   test.beforeAll(async ({ page }) => {
     await page.goto("https://www.saucedemo.com/");
+    loginPage = new LoginPage(page);
+    productsPage = new ProductsPage(page);
+    shoppingCart = new ShoppingCart(page);
+    checkoutInfoPage = new CheckoutInfoPage(page);
+    checkoutOverviewPage = new CheckoutOverviewPage(page);
+    checkoutCompletePage = new CheckoutCompletePage(page);
   });
 
-  test("Go to Website", async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.submitLogin();
-    //Add the first item in the products list to the cart
-    //Click on the shopping cart
-    //verify the cart has that item
-    //click checkout
-    //enter shipping info on checkout page
-    //click continue to go to the summary page
-    //verify the price
-    //click finish to goto finish page
-    //Verify the success message displays
+  test("Add a single item to cart and checkout", async () => {
+    const username = "standard_user";
+    const password = "secret_sauce";
+
+    await loginPage.login(username, password);
+    const priceOnProductsPage = await productsPage.getFirstProductPrice();
+    await productsPage.addFirstProductToCart();
+    await productsPage.clickShoppingCart();
+    const numberOfItemsInCart = await shoppingCart.getNumberOfItemsInCart();
+    expect(numberOfItemsInCart).toBe(1);
+
+    await shoppingCart.clickCheckout();
+    await checkoutInfoPage.fillFirstName("John");
+    await checkoutInfoPage.fillLastName("Smith");
+    await checkoutInfoPage.fillPostalCode("12345");
+
+    await checkoutInfoPage.clickContinue();
+    expect(await checkoutOverviewPage.getSubtotal()).toContain(
+      priceOnProductsPage
+    );
+    await checkoutOverviewPage.clickFinish();
+    const expectedMessage =
+      "Your order has been dispatched, and will arrive just as fast as the pony can get there!";
+    expect(await checkoutCompletePage.getCompleteText()).toEqual(
+      expectedMessage
+    );
   });
 
   test.afterAll(async ({ page }) => {
