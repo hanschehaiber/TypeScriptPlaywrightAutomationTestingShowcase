@@ -6,7 +6,7 @@ import { expect, test } from "@playwright/test";
 import { LoginPage } from "./pages/login.page";
 import { ProductsPage } from "./pages/products.page";
 
-test.describe("Test Suite", async () => {
+test.describe("Sauce Demo Happy Path Test Suite", async () => {
   let productsPage: ProductsPage;
   let loginPage: LoginPage;
   let shoppingCart: ShoppingCart;
@@ -14,7 +14,7 @@ test.describe("Test Suite", async () => {
   let checkoutOverviewPage: CheckoutOverviewPage;
   let checkoutCompletePage: CheckoutCompletePage;
 
-  test.beforeAll(async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto("https://www.saucedemo.com/");
     loginPage = new LoginPage(page);
     productsPage = new ProductsPage(page);
