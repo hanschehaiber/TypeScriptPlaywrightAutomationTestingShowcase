@@ -18,10 +18,10 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
     await page.goto("https://www.saucedemo.com/");
     loginPage = new LoginPage(page);
     productsPage = new ProductsPage(page);
-    shoppingCart = new ShoppingCart(page);
     checkoutInfoPage = new CheckoutInfoPage(page);
     checkoutOverviewPage = new CheckoutOverviewPage(page);
     checkoutCompletePage = new CheckoutCompletePage(page);
+    shoppingCart = new ShoppingCart(page);
   });
 
   test("Add a single item to cart and checkout", async () => {
@@ -31,7 +31,7 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
     await loginPage.login(username, password);
     const priceOnProductsPage = await productsPage.getFirstProductPrice();
     await productsPage.addFirstProductToCart();
-    await productsPage.clickShoppingCart();
+    await productsPage.shoppingCart.click();
     const numberOfItemsInCart = await shoppingCart.getNumberOfItemsInCart();
     expect(numberOfItemsInCart).toBe(1);
 
