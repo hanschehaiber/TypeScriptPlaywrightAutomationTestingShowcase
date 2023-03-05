@@ -3,13 +3,11 @@ import { BasePage } from "./base.page";
 import { CheckoutInfoPage } from "./checkout.info.page";
 
 export class ShoppingCart extends BasePage {
-  readonly page: Page;
   readonly cartItems: Locator;
   readonly checkout: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.page = page;
     this.cartItems = page.locator("[class='cart_item']");
     this.checkout = page.locator("[data-test='checkout']");
   }

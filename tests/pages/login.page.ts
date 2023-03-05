@@ -1,16 +1,13 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./base.page";
-import { ProductsPage } from "./products.page";
 
 export class LoginPage extends BasePage {
-  readonly page: Page;
   readonly username: Locator;
   readonly password: Locator;
   readonly submitLoginButton: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.page = page;
     this.username = page.locator("[data-test='username']");
     this.password = page.locator("#password");
     this.submitLoginButton = page.locator("#login-button");
