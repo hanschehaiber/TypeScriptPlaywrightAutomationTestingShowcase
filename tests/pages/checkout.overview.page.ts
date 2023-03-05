@@ -1,6 +1,5 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./base.page";
-import { CheckoutCompletePage } from "./checkout.complete.page";
 
 export class CheckoutOverviewPage extends BasePage {
   readonly subtotal: Locator;

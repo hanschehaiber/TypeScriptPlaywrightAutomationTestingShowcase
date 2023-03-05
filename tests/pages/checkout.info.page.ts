@@ -1,6 +1,5 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./base.page";
-import { CheckoutOverviewPage } from "./checkout.overview.page";
 
 export class CheckoutInfoPage extends BasePage {
   readonly firstName: Locator;
