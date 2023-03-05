@@ -14,8 +14,4 @@ export class ShoppingCart extends BasePage {
   async getNumberOfItemsInCart() {
     return await this.cartItems.count();
   }
-
-  async clickCheckout() {
-    await this.checkout.click();
-  }
 }

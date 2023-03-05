@@ -12,19 +12,10 @@ export class LoginPage extends BasePage {
     this.password = page.locator("#password");
     this.submitLoginButton = page.locator("#login-button");
   }
-  async fillUsername(username: string) {
-    await this.username.waitFor();
-    await this.username.fill(username);
-  }
-  async fillPassword(password: string) {
-    await this.password.fill(password);
-  }
-  async submitLogin() {
-    await this.submitLoginButton.click();
-  }
+
   async login(username: string, password: string) {
-    await this.fillUsername(username);
-    await this.fillPassword(password);
-    await this.submitLogin();
+    await this.username.fill(username);
+    await this.password.fill(password);
+    await this.submitLoginButton.click();
   }
 }

@@ -15,7 +15,4 @@ export class CheckoutOverviewPage extends BasePage {
   async getSubtotal() {
     return await this.subtotal.innerText();
   }
-  async clickFinish() {
-    await this.finish.click();
-  }
 }

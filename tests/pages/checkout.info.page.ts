@@ -16,16 +16,14 @@ export class CheckoutInfoPage extends BasePage {
     this.continueButton = page.locator("#continue");
   }
 
-  async fillFirstName(firstNameText: string) {
-    await this.firstName.fill(firstNameText);
-  }
-  async fillLastName(lastNameText: string) {
-    await this.lastName.fill(lastNameText);
-  }
-  async fillPostalCode(postalCodeText: string) {
-    await this.postalCode.fill(postalCodeText);
-  }
-  async clickContinue() {
+  async fillOutAndSubmitCheckoutInfo(
+    firstName: string,
+    lastName: string,
+    postalCode: string
+  ) {
+    await this.firstName.fill(firstName);
+    await this.lastName.fill(lastName);
+    await this.postalCode.fill(postalCode);
     await this.continueButton.click();
   }
 }

@@ -27,6 +27,9 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
   test("Add a single item to cart and checkout", async () => {
     const username = "standard_user";
     const password = "secret_sauce";
+    const firstName = "John";
+    const lastName = "Smith";
+    const postalCode = "12345";
 
     await loginPage.login(username, password);
     const priceOnProductsPage = await productsPage.getFirstProductPrice();
@@ -35,16 +38,18 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
     const numberOfItemsInCart = await shoppingCart.getNumberOfItemsInCart();
     expect(numberOfItemsInCart).toBe(1);
 
-    await shoppingCart.clickCheckout();
-    await checkoutInfoPage.fillFirstName("John");
-    await checkoutInfoPage.fillLastName("Smith");
-    await checkoutInfoPage.fillPostalCode("12345");
+    await shoppingCart.checkout.click();
 
-    await checkoutInfoPage.clickContinue();
+    await checkoutInfoPage.fillOutAndSubmitCheckoutInfo(
+      firstName,
+      lastName,
+      postalCode
+    );
+
     expect(await checkoutOverviewPage.getSubtotal()).toContain(
       priceOnProductsPage
     );
-    await checkoutOverviewPage.clickFinish();
+    await checkoutOverviewPage.finish.click();
     const expectedMessage =
       "Your order has been dispatched, and will arrive just as fast as the pony can get there!";
     expect(await checkoutCompletePage.getCompleteText()).toEqual(
