@@ -10,8 +10,4 @@ export class ShoppingCart extends BasePage {
     this.cartItems = page.locator("[class='cart_item']");
     this.checkout = page.locator("[data-test='checkout']");
   }
-
-  async getNumberOfItemsInCart() {
-    return await this.cartItems.count();
-  }
 }
