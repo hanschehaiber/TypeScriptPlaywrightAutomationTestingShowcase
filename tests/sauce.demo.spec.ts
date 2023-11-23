@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import { CheckoutCompletePage } from "./pages/checkout.complete.page";
 import { CheckoutOverviewPage } from "./pages/checkout.overview.page";
 import { CheckoutInfoPage } from "./pages/checkout.info.page";
-import { ShoppingCart } from "./pages/shopping.cart.page";
+import { ShoppingCartPage } from "./pages/shopping.cart.page";
 import { LoginPage } from "./pages/login.page";
 import { ProductsPage } from "./pages/products.page";
 
@@ -16,7 +16,7 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
 
   let productsPage: ProductsPage;
   let loginPage: LoginPage;
-  let shoppingCart: ShoppingCart;
+  let shoppingCartPage: ShoppingCartPage;
   let checkoutInfoPage: CheckoutInfoPage;
   let checkoutOverviewPage: CheckoutOverviewPage;
   let checkoutCompletePage: CheckoutCompletePage;
@@ -27,7 +27,7 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
     checkoutInfoPage = new CheckoutInfoPage(page);
     checkoutOverviewPage = new CheckoutOverviewPage(page);
     checkoutCompletePage = new CheckoutCompletePage(page);
-    shoppingCart = new ShoppingCart(page);
+    shoppingCartPage = new ShoppingCartPage(page);
 
     test.step("Go to Login Page and Login", async () => {
       await page.goto("https://www.saucedemo.com/");
@@ -39,8 +39,8 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
     const priceOnProductsPage = await productsPage.getFirstProductPrice();
     await productsPage.addFirstProductToCart();
     await productsPage.shoppingCart.click();
-    await expect(shoppingCart.cartItems).toHaveCount(1);
-    await shoppingCart.checkout.click();
+    await expect(shoppingCartPage.cartItems).toHaveCount(1);
+    await shoppingCartPage.checkout.click();
 
     await checkoutInfoPage.fillOutAndSubmitCheckoutInfo(
       firstName,
