@@ -58,8 +58,4 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
       expectedMessage
     );
   });
-
-  test.afterAll(async ({ page }) => {
-    await page.close();
-  });
 });
