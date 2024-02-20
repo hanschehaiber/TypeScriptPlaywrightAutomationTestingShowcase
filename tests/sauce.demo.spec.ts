@@ -35,7 +35,7 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
     });
   });
 
-  test.afterAll(async ({ page }) => {
+  test.afterEach(async ({ page }) => {
     await page.close();
   })
 
