@@ -35,6 +35,10 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
     });
   });
 
+  test.afterAll(async ({ page }) => {
+    await page.close();
+  })
+
   test("Add a single item to cart and checkout", async () => {
     const priceOnProductsPage = await productsPage.getFirstProductPrice();
     await productsPage.addFirstProductToCart();
