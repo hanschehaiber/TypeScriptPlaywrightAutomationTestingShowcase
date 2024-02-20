@@ -17,5 +17,8 @@
   "homepage": "https://github.com/hanschehaiber/PlaywrightAutomationTestingShowcase#readme",
   "devDependencies": {
     "@playwright/test": "^1.41.2"
+  },
+  "dependencies": {
+    "playwright": "^1.41.2"
   }
 }
