@@ -5,12 +5,14 @@ export class LoginPage extends BasePage {
   readonly username: Locator;
   readonly password: Locator;
   readonly loginButton: Locator;
+  readonly lockedOutError: Locator;
 
   constructor(page: Page) {
     super(page);
     this.username = page.locator("[data-test='username']");
     this.password = page.locator("#password");
     this.loginButton = page.locator("#login-button");
+    this.lockedOutError = page.locator("[data-test='error']");
   }
 
   async login(username: string, password: string) {

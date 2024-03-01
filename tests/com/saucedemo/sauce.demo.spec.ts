@@ -62,4 +62,20 @@ test.describe("Sauce Demo Happy Path Test Suite", async () => {
       expectedMessage
     );
   });
+
+
+});
+
+test.describe("Negative Test Cases", async () => {
+  test("Test Locked Out User", async ({ page }) => {
+    const username = 'locked_out_user';
+    const password = 'secret_sauce';
+    await page.goto('https://www.saucedemo.com');
+    const loginPage = new LoginPage(page);
+    await loginPage.username.fill(username);
+    await loginPage.password.fill(password);
+    await loginPage.loginButton.click();
+    await expect(loginPage.lockedOutError).toBeVisible();
+    await page.close();
+  })
 });
