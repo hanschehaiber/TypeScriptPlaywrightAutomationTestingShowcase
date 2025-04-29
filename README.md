@@ -80,7 +80,3 @@ TypeScriptPlaywrightAutomationTestingShowcase/
 
 - Test files are located in the `tests/` directory.
 - Use the Page Object Model (POM) pattern for creating reusable and maintainable test code.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
